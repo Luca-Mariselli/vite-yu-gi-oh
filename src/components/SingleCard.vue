@@ -2,7 +2,7 @@
 import store from '../Data/store.js'
 export default {
     props: {
-        cartaSingola: String
+        cartaSingola: [Object, Number]
     },
     components: {
 
@@ -23,13 +23,12 @@ export default {
 <template>
     <main>
         <div class="contenitore">
-            <div class="carta" v-for="(cartaSingola, i) in store.carte">
-                <img class="img-w" :src="this.store.carte[i].card_images[0].image_url" alt="">
+            <div class="carta" v-for="cartaSingola in store.carte">
+                <img class="img-w" :src="cartaSingola.card_images[0].image_url" alt="">
                 <div>{{ cartaSingola.name }}</div>
-                <div>{{ cartaSingola.race }}</div>
+                <div>{{ cartaSingola.archetype }}</div>
             </div>
         </div>
-
     </main>
 </template>
 
@@ -42,7 +41,7 @@ export default {
     flex-direction: row;
     flex-wrap: wrap;
     margin: 0 auto;
-    margin-top: 4rem;
+    margin-top: 2rem;
     justify-content: space-between;
 }
 

@@ -1,34 +1,28 @@
 <script>
-import store from '../Data/store.js'
 import SingleCard from './SingleCard.vue';
+
 export default {
+    props: {
+        filteredCards: {
+            type: Array,
+            default: () => [],
+        },
+    },
     components: {
         SingleCard,
     },
-    data() {
-        return {
-            store
-        }
-    },
-    methods: {
-
-    },
-    mounted() {
-    }
-}
+};
 </script>
 
 <template>
-    <main>
-        <div class="contenitore">
-            <SingleCard v-for="(carta, i) in store.carte" :cartaSingola="carta" />
+    <div class="contenitore">
+        <div v-if="filteredCards.length > 0">
+            <SingleCard v-for="(carta, i) in filteredCards" :key="i" :cartaSingola="carta" />
         </div>
-
-    </main>
-
-
-
-
+        <div v-else>
+            Nessuna carta corrispondente all'archetipo selezionato.
+        </div>
+    </div>
 </template>
 
 <style scoped></style>
