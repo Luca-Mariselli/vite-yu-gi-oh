@@ -24,9 +24,7 @@ export default {
     },
   },
 
-  computed: {
-    filteredCards() { }
-  },
+
   created() {
     axios.get('https://db.ygoprodeck.com/api/v7/cardinfo.php?num=30&offset=0').then(risultato => {
       console.log(risultato.data.data);
@@ -35,6 +33,7 @@ export default {
     axios.get('https://db.ygoprodeck.com/api/v7/archetypes.php').then(risultatoArch => {
       this.store.archetypes = risultatoArch.data;
     });
+    this.filteredCards()
   },
 }
 </script>
