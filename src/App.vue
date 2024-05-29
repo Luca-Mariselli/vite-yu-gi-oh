@@ -14,7 +14,7 @@ export default {
       selectedArchetype: '',
     };
   },
-  computed: {
+  methods: {
     filteredCards() {
       if (this.selectedArchetype) {
         return this.store.carte.filter(carta => carta.archetype === this.selectedArchetype);
@@ -22,6 +22,10 @@ export default {
         return [];
       }
     },
+  },
+
+  computed: {
+    filteredCards() { }
   },
   created() {
     axios.get('https://db.ygoprodeck.com/api/v7/cardinfo.php?num=30&offset=0').then(risultato => {
@@ -44,7 +48,7 @@ export default {
     <div class="selector">
       <label for="archtype-select">Choose an archetype:</label>
       <br>
-      <select name="archetypes" id="archtype-select" v-model="selectedArchetype">
+      <select @change="filteredCards()" name="archetypes" id="archtype-select" v-model="selectedArchetype">
         <option value="">--Please choose an archetype--</option>
         <option v-for="archetipo in store.archetypes" :key="archetipo.archetype_name" :value="archetipo.archetype_name">
           {{ archetipo.archetype_name }}
